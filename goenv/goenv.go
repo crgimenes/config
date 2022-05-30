@@ -7,7 +7,6 @@ import (
 	"runtime"
 	"strconv"
 	"strings"
-	"time"
 
 	"github.com/goconfig/goconfig/structtag"
 )
@@ -31,8 +30,6 @@ func Setup(tag string, tagDefault string) {
 	structtag.Prefix = Prefix
 	SetTag(tag)
 	SetTagDefault(tagDefault)
-
-	structtag.ParsePakagesTypeMap["time.Duration"] = reflectTimeDuration
 
 	structtag.ParseMap[reflect.Int64] = reflectInt
 	structtag.ParseMap[reflect.Int] = reflectInt
@@ -73,9 +70,6 @@ func parseValue(datatype string, value *reflect.Value) (ret string, ok bool) {
 	case "float64":
 		ret = strconv.FormatFloat(value.Float(), 'f', -1, 64)
 		ok = ret != "0"
-	case "time.Duration":
-		ret = strconv.FormatInt(value.Int(), 10)
-		ok = ret != "0"
 	}
 	return
 }
@@ -109,19 +103,6 @@ func getNewValue(field *reflect.StructField, value *reflect.Value, tag string, d
 
 	// get value from default settings
 	ret = defaultValue
-	return
-}
-
-func reflectTimeDuration(field *reflect.StructField, value *reflect.Value, tag string) (err error) {
-	newValue := getNewValue(field, value, tag, "time.Duration")
-	if newValue == "" {
-		return
-	}
-	d, err := time.ParseDuration(newValue)
-	if err != nil {
-		return
-	}
-	value.SetInt(int64(d.Seconds()))
 	return
 }
 

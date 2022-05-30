@@ -2,7 +2,6 @@ package validate
 
 import (
 	"testing"
-	"time"
 )
 
 type testStruct struct {
@@ -12,7 +11,6 @@ type testStruct struct {
 	D bool `cfg:"D" cfgDefault:"true"`
 	F float64
 	G float64 `cfg:"G" cfgDefault:"3.05"`
-	H time.Duration
 	I int64
 	N string `cfg:"-"`
 	M int

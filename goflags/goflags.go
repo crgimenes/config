@@ -45,8 +45,6 @@ func Setup(tag, tagDefault, TagHelper string) {
 	SetTagDefault(tagDefault)
 	SetTagHelper(TagHelper)
 
-	structtag.ParsePakagesTypeMap["time.Duration"] = reflectTimeDuration
-
 	structtag.ParseMap[reflect.Int64] = reflectInt
 	structtag.ParseMap[reflect.Int] = reflectInt
 	structtag.ParseMap[reflect.Float64] = reflectFloat

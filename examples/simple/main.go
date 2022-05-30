@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"time"
 
 	"github.com/crgimenes/goconfig"
 )
@@ -18,7 +17,6 @@ type mongoDB struct {
 }
 
 type configTest struct {
-	Timeout   time.Duration `cfg:"timeout" cfgDefault:"5m"`
 	Domain    string
 	DebugMode bool `json:"db" cfg:"db" cfgDefault:"false"`
 	MongoDB   mongoDB
@@ -42,7 +40,6 @@ func main() {
 	   line and now you can use it.
 	*/
 
-	println("config.Timeout.....:", config.Timeout)
 	println("config.Domain......:", config.Domain)
 	println("config.DebugMode...:", config.DebugMode)
 	println("config.MongoDB.Host:", config.MongoDB.Host)

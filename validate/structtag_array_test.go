@@ -2,7 +2,6 @@ package validate
 
 import (
 	"testing"
-	"time"
 )
 
 type testStructArray struct {
@@ -10,14 +9,13 @@ type testStructArray struct {
 	B []string
 	C []bool
 	D []float64
-	E []time.Duration
 	F []int64
 	G []testSubArray `cfgRequired:"true"`
 }
 
 type testSubArray struct {
-	A int        `cfg:"A" cfgDefault:"300"`
-	B []string   `cfg:"C" cfgRequired:"true"`
+	A int      `cfg:"A" cfgDefault:"300"`
+	B []string `cfg:"C" cfgRequired:"true"`
 	S []testSubArraySub
 }
 
@@ -33,15 +31,15 @@ func TestParseArray(t *testing.T) {
 	Setup("cfg", "cfgDefault")
 
 	s := &testStructArray{
-		A: []int{ 1,2,3 },
-		B: []string{ "a", "b" },
+		A: []int{1, 2, 3},
+		B: []string{"a", "b"},
 		G: []testSubArray{{
 			A: 1,
-			B: []string{ "", "a" },
+			B: []string{"", "a"},
 			S: []testSubArraySub{{
-				B: []string{ "test" },
-			},},
-		},},
+				B: []string{"test"},
+			}},
+		}},
 	}
 
 	err := Parse(s)
@@ -62,7 +60,7 @@ func TestParseArray(t *testing.T) {
 	}
 
 	// Test to check cfgRequired in SubArray
-	s = &testStructArray{G: []testSubArray{{A: 1,}}}
+	s = &testStructArray{G: []testSubArray{{A: 1}}}
 	err = Parse(s)
 	if err == nil { // TODO: support cfgRequired
 		t.Fatal("expected error about required field but got nil")

@@ -1,7 +1,6 @@
 package structtag
 
 import (
-	"fmt"
 	"errors"
 	"fmt"
 	"reflect"
