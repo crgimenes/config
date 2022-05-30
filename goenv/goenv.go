@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gosidekick/goconfig/structtag"
+	"github.com/goconfig/goconfig/structtag"
 )
 
 var (

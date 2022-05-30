@@ -5,7 +5,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/gosidekick/goconfig"
+	"github.com/goconfig/goconfig"
 	ini "gopkg.in/ini.v1"
 )
 

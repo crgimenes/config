@@ -12,11 +12,11 @@ import (
 
 	"path/filepath"
 
-	"github.com/gosidekick/goconfig/goenv"
-	"github.com/gosidekick/goconfig/goflags"
-	"github.com/gosidekick/goconfig/structtag"
-	"github.com/gosidekick/goconfig/validate"
 	"github.com/fsnotify/fsnotify"
+	"github.com/goconfig/goconfig/goenv"
+	"github.com/goconfig/goconfig/goflags"
+	"github.com/goconfig/goconfig/structtag"
+	"github.com/goconfig/goconfig/validate"
 )
 
 // Fileformat struct holds the functions to Load the file containing the settings

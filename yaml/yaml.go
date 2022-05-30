@@ -5,7 +5,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/gosidekick/goconfig"
+	"github.com/goconfig/goconfig"
 	"gopkg.in/yaml.v2"
 )
 

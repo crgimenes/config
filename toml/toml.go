@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 	"reflect"
 
-	"github.com/gosidekick/goconfig"
+	"github.com/goconfig/goconfig"
 	"github.com/pelletier/go-toml"
 )
 
