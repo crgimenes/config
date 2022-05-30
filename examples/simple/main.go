@@ -1,6 +1,11 @@
 package main
 
-import "github.com/gosidekick/goconfig"
+import (
+	"fmt"
+	"time"
+
+	"github.com/crgimenes/goconfig"
+)
 
 /*
 step 1: Declare your configuration struct,
@@ -13,6 +18,7 @@ type mongoDB struct {
 }
 
 type configTest struct {
+	Timeout   time.Duration `cfg:"timeout" cfgDefault:"5m"`
 	Domain    string
 	DebugMode bool `json:"db" cfg:"db" cfgDefault:"false"`
 	MongoDB   mongoDB
@@ -26,7 +32,7 @@ func main() {
 	// step 3: Pass the instance pointer to the parser
 	err := goconfig.Parse(&config)
 	if err != nil {
-		println(err)
+		fmt.Println(err)
 		return
 	}
 
@@ -36,6 +42,7 @@ func main() {
 	   line and now you can use it.
 	*/
 
+	println("config.Timeout.....:", config.Timeout)
 	println("config.Domain......:", config.Domain)
 	println("config.DebugMode...:", config.DebugMode)
 	println("config.MongoDB.Host:", config.MongoDB.Host)

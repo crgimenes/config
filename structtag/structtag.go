@@ -3,6 +3,7 @@ package structtag
 import (
 	"fmt"
 	"errors"
+	"fmt"
 	"reflect"
 )
 
@@ -45,6 +46,14 @@ var (
 
 	// ParseMap points to each of the supported types
 	ParseMap map[reflect.Kind]ReflectFunc
+
+	// ParsePakagesTypeMap points to each of the suported pakage or user defined types
+	// and it's priority over ParseMap
+	ParsePakagesTypeMap map[string]ReflectFunc
+
+	// ParseNameMap point to name of each fueld and functions are defined by the user
+	// it's priority over ParsePakagesTypeMap and ParseMap
+	ParseNameMap map[string]ReflectFunc
 )
 
 // Setup maps and variables
@@ -53,6 +62,8 @@ func Setup() {
 	TagSeparator = "_"
 
 	ParseMap = make(map[reflect.Kind]ReflectFunc)
+	ParsePakagesTypeMap = make(map[string]ReflectFunc)
+	ParseNameMap = make(map[string]ReflectFunc)
 
 	ParseMap[reflect.Struct] = ReflectStruct
 	ParseMap[reflect.Array] = ReflectArray
@@ -98,7 +109,28 @@ func Parse(s interface{}, superTag string) (err error) {
 			continue
 		}
 
-		f, ok := ParseMap[kind]
+		fmt.Println("name:", field.Type.Name())
+		fmt.Println("type:", field.Type.String())
+
+		f, ok := ParseNameMap[field.Type.Name()]
+		if ok {
+			err = f(&field, &value, t)
+			if err != nil {
+				return
+			}
+			continue
+		}
+
+		f, ok = ParsePakagesTypeMap[field.Type.String()]
+		if ok {
+			err = f(&field, &value, t)
+			if err != nil {
+				return
+			}
+			continue
+		}
+
+		f, ok = ParseMap[kind]
 		if !ok {
 			err = ErrTypeNotSupported
 			return

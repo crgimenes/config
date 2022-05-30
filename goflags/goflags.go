@@ -45,6 +45,8 @@ func Setup(tag, tagDefault, TagHelper string) {
 	SetTagDefault(tagDefault)
 	SetTagHelper(TagHelper)
 
+	structtag.ParsePakagesTypeMap["time.Duration"] = reflectTimeDuration
+
 	structtag.ParseMap[reflect.Int64] = reflectInt
 	structtag.ParseMap[reflect.Int] = reflectInt
 	structtag.ParseMap[reflect.Float64] = reflectFloat
@@ -120,6 +122,22 @@ func Reset() {
 
 func loadVisit(f *flag.Flag) {
 	visitedMap[f.Name] = f
+}
+
+func reflectTimeDuration(field *reflect.StructField, value *reflect.Value, tag string) (err error) {
+	var aux, defaltValue string
+	defaltValue = field.Tag.Get(structtag.TagDefault)
+	usage := field.Tag.Get(structtag.TagHelper)
+
+	meta := parameterMeta{}
+	meta.Value = &aux
+	meta.Tag = strings.ToLower(tag)
+	meta.Kind = reflect.String
+	parametersMetaMap[value] = meta
+
+	flag.StringVar(&aux, meta.Tag, defaltValue, usage)
+
+	return
 }
 
 func reflectInt(field *reflect.StructField, value *reflect.Value, tag string) (err error) {
