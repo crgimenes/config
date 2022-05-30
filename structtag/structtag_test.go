@@ -57,7 +57,6 @@ func reflectReturnError(field *reflect.StructField, value *reflect.Value, tag st
 }
 
 func TestParse(t *testing.T) {
-
 	Setup()
 
 	s := &testStruct{A: 1, S: testSub{A: 1, B: "2"}}
@@ -93,8 +92,6 @@ func TestParse(t *testing.T) {
 		t.Fatal("Default value error")
 	}
 
-	//fmt.Printf("\n\nParse: %#v\n\n", s)
-
 	ParseMap[reflect.Int] = reflectReturnError
 	ParseMap[reflect.String] = reflectReturnError
 	err = Parse(s, "")
@@ -118,7 +115,6 @@ func TestParse(t *testing.T) {
 	if err != ErrNotAStruct {
 		t.Fatal("ErrNotAStruct error expected")
 	}
-
 }
 
 func TestPrefix(t *testing.T) {

@@ -18,7 +18,7 @@ func init() {
 	goconfig.Formats = append(goconfig.Formats, f)
 }
 
-// LoadJSON config file
+// LoadJSON config file.
 func LoadJSON(config interface{}) (err error) {
 	configFile := filepath.Join(goconfig.Path, goconfig.File)
 	file, err := os.Open(configFile)

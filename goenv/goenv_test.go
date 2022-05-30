@@ -31,7 +31,6 @@ type testSubSub struct {
 }
 
 func TestParse(t *testing.T) {
-
 	Prefix = "PREFIX"
 	Setup("cfg", "cfgDefault")
 

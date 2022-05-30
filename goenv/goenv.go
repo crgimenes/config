@@ -18,11 +18,11 @@ var (
 	// Usage is the function that is called when an error occurs.
 	Usage func()
 
-	// PrintDefaultsOutput changes the default output help string
+	// PrintDefaultsOutput changes the default output help string.
 	PrintDefaultsOutput string
 )
 
-// Setup maps and variables
+// Setup maps and variables.
 func Setup(tag string, tagDefault string) {
 	Usage = DefaultUsage
 
@@ -40,17 +40,17 @@ func Setup(tag string, tagDefault string) {
 	structtag.ParseMap[reflect.Slice] = reflectArray
 }
 
-// SetTag set a new tag
+// SetTag set a new tag.
 func SetTag(tag string) {
 	structtag.Tag = tag
 }
 
-// SetTagDefault set a new TagDefault to retorn default values
+// SetTagDefault set a new TagDefault to retorn default values.
 func SetTagDefault(tag string) {
 	structtag.TagDefault = tag
 }
 
-// Parse configuration
+// Parse configuration.
 func Parse(config interface{}) (err error) {
 	err = structtag.Parse(config, "")
 	return
@@ -158,13 +158,13 @@ func reflectArray(field *reflect.StructField, value *reflect.Value, tag string) 
 	return
 }
 
-// PrintDefaults print the default help
+// PrintDefaults print the default help.
 func PrintDefaults() {
 	fmt.Println("Environment variables:")
 	fmt.Println(PrintDefaultsOutput)
 }
 
-// DefaultUsage is assigned for Usage function by default
+// DefaultUsage is assigned for Usage function by default.
 func DefaultUsage() {
 	fmt.Println("Usage")
 	PrintDefaults()

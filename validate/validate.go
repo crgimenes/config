@@ -15,7 +15,7 @@ var Prefix string
 // Usage is the function that is called when an error occurs.
 var Usage func()
 
-// Setup maps and variables
+// Setup maps and variables.
 func Setup(tag string, tagDefault string) {
 	structtag.Setup()
 	structtag.Prefix = Prefix
@@ -29,23 +29,23 @@ func Setup(tag string, tagDefault string) {
 	structtag.ParseMap[reflect.Bool] = reflectBool
 }
 
-// SetTag set a new tag
+// SetTag set a new tag.
 func SetTag(tag string) {
 	structtag.Tag = tag
 }
 
-// SetTagDefault set a new TagDefault to retorn default values
+// SetTagDefault set a new TagDefault to retorn default values.
 func SetTagDefault(tag string) {
 	structtag.TagDefault = tag
 }
 
-// Parse configuration
+// Parse configuration.
 func Parse(config interface{}) (err error) {
 	err = structtag.Parse(config, "")
 	return
 }
 
-// PrintDefaultsOutput changes the default output help string
+// PrintDefaultsOutput changes the default output help string.
 var PrintDefaultsOutput string
 
 func getValue(value *reflect.Value, datatype string) (ret string) {

@@ -18,7 +18,7 @@ func init() {
 	goconfig.Formats = append(goconfig.Formats, f)
 }
 
-// LoadINI config file
+// LoadINI config file.
 func LoadINI(config interface{}) (err error) {
 	configFile := filepath.Join(goconfig.Path, goconfig.File)
 	file, err := os.Open(configFile)

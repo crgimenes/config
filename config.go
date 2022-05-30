@@ -1,4 +1,4 @@
-//Package goconfig uses a struct as input and populates the
+// Package goconfig uses a struct as input and populates the
 //fields of this struct with parameters fom command
 //line, environment variables and configuration file.
 package goconfig
@@ -8,9 +8,8 @@ import (
 	"fmt"
 	"os"
 	"path"
-	"time"
-
 	"path/filepath"
+	"time"
 
 	"github.com/fsnotify/fsnotify"
 	"github.com/goconfig/goconfig/goenv"
@@ -19,7 +18,7 @@ import (
 	"github.com/goconfig/goconfig/validate"
 )
 
-// Fileformat struct holds the functions to Load the file containing the settings
+// Fileformat struct holds the functions to Load the file containing the settings.
 type Fileformat struct {
 	Extension   string
 	Load        func(config interface{}) (err error)
@@ -28,25 +27,25 @@ type Fileformat struct {
 
 var (
 
-	// Tag to set main name of field
+	// Tag to set main name of field.
 	Tag = "cfg"
 
-	// TagDefault to set default value
+	// TagDefault to set default value.
 	TagDefault = "cfgDefault"
 
-	// TagHelper to set usage help line
+	// TagHelper to set usage help line.
 	TagHelper = "cfgHelper"
 
-	// Path sets default config path
+	// Path sets default config path.
 	Path string
 
-	// File name of default config file
+	// File name of default config file.
 	File string
 
-	// FileRequired config file required
+	// FileRequired config file required.
 	FileRequired bool
 
-	// HelpString temporarily saves help
+	// HelpString temporarily saves help.
 	HelpString string
 
 	// PrefixFlag is a string that would be placed at the beginning of the generated Flag tags.
@@ -58,22 +57,21 @@ var (
 	// ErrFileFormatNotDefined Is the error that is returned when there is no defined configuration file format.
 	ErrFileFormatNotDefined = errors.New("file format not defined")
 
-	//Usage is a function to show the help, can be replaced by your own version.
 	Usage func()
 
 	// Formats is the list of registered formats.
 	Formats []Fileformat
 
-	// FileEnv is the enviroment variable that define the config file
+	// FileEnv is the enviroment variable that define the config file.
 	FileEnv string
 
-	// PathEnv is the enviroment variable that define the config file path
+	// PathEnv is the enviroment variable that define the config file path.
 	PathEnv string
 
-	// WatchConfigFile is the flag to update the config when the config file changes
+	// WatchConfigFile is the flag to update the config when the config file changes.
 	WatchConfigFile bool
 
-	// DisableFlags on the command line
+	// DisableFlags on the command line.
 	DisableFlags bool
 )
 
@@ -101,7 +99,7 @@ func init() {
 	WatchConfigFile = false
 }
 
-// Parse configuration
+// Parse configuration.
 func Parse(config interface{}) (err error) {
 	goenv.Prefix = PrefixEnv
 	goenv.Setup(Tag, TagDefault)
@@ -144,7 +142,7 @@ func Parse(config interface{}) (err error) {
 	return
 }
 
-// PrintDefaults print the default help
+// PrintDefaults print the default help.
 func PrintDefaults() {
 	if File != "" {
 		fmt.Printf("Config file %q:\n", filepath.Join(Path, File))
@@ -152,7 +150,7 @@ func PrintDefaults() {
 	}
 }
 
-// DefaultUsage is assigned for Usage function by default
+// DefaultUsage is assigned for Usage function by default.
 func DefaultUsage() {
 	fmt.Println("Usage")
 	goflags.PrintDefaults()
@@ -228,7 +226,7 @@ func asyncParse(config interface{}, w *fsnotify.Watcher, chErr chan<- error, chU
 }
 
 // ParseAndWatch configuration returns a channel for errors while watching files
-// and anorther when each update has been detected
+// and anorther when each update has been detected.
 func ParseAndWatch(config interface{}) (chChanges chan int64, chErr chan error, err error) {
 	chErr = make(chan error, 1)
 	chChanges = make(chan int64, 1)

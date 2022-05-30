@@ -50,7 +50,7 @@ func mPrepareHelp(config interface{}) (help string, err error) {
 	return
 }
 
-// -=-=-=-=-=-=-=-=-
+// -=-=-=-=-=-=-=-=-.
 func eLoad(config interface{}) (err error) {
 	err = errors.New("test")
 	return
@@ -64,7 +64,6 @@ func ePrepareHelp(config interface{}) (help string, err error) {
 // -=-=-=-=-=-=-=-=-
 
 func TestParse(t *testing.T) {
-
 	s := &testStruct{A: 1, S: testSub{A: 1, B: "2"}}
 	File = "config.txt"
 
@@ -183,7 +182,6 @@ func TestParse(t *testing.T) {
 }
 
 func ExampleParse() {
-
 	type config struct {
 		Name  string `cfg:"Name" cfgDefault:"root"`
 		Value int    `cfg:"Value" cfgDefault:"123"`
@@ -197,5 +195,4 @@ func ExampleParse() {
 	}
 
 	println("Name:", cfg.Name, "Value:", cfg.Value)
-
 }

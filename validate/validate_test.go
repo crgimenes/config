@@ -30,7 +30,6 @@ type testSubSub struct {
 }
 
 func TestParse(t *testing.T) {
-
 	Setup("cfg", "cfgDefault")
 
 	s := &testStruct{A: 1, F: 1.0, S: testSub{A: 1, B: "", S: testSubSub{B: "test"}}}
@@ -44,5 +43,4 @@ func TestParse(t *testing.T) {
 	if err == nil {
 		t.Fatal("expected error but got nil")
 	}
-
 }

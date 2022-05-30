@@ -1,13 +1,12 @@
 package goflags
 
 import (
+	"flag"
 	"fmt"
 	"os"
 	"reflect"
 	"strconv"
 	"strings"
-
-	"flag"
 
 	"github.com/goconfig/goconfig/structtag"
 )
@@ -23,17 +22,16 @@ var (
 	visitedMap        map[string]*flag.Flag
 	disableFags       bool
 
-	// Preserve disable default values and get only visited parameters thus preserving the values passed in the structure, default false
+	// Preserve disable default values and get only visited parameters thus preserving the values passed in the structure, default false.
 	Preserve bool
 
 	// Prefix is a string that would be placed at the beginning of the generated tags.
 	Prefix string
 
-	//Usage is a function to show the help, can be replaced by your own version.
 	Usage func()
 )
 
-// Setup maps and variables
+// Setup maps and variables.
 func Setup(tag, tagDefault, TagHelper string) {
 	Usage = DefaultUsage
 	parametersMetaMap = make(map[*reflect.Value]parameterMeta)
@@ -52,22 +50,22 @@ func Setup(tag, tagDefault, TagHelper string) {
 	structtag.ParseMap[reflect.Bool] = reflectBool
 }
 
-// SetTag set a new tag
+// SetTag set a new tag.
 func SetTag(tag string) {
 	structtag.Tag = tag
 }
 
-// SetTagDefault set a new TagDefault to retorn default values
+// SetTagDefault set a new TagDefault to retorn default values.
 func SetTagDefault(tag string) {
 	structtag.TagDefault = tag
 }
 
-// SetTagHelper set a new TagHelper
+// SetTagHelper set a new TagHelper.
 func SetTagHelper(tag string) {
 	structtag.TagHelper = tag
 }
 
-// Parse configuration
+// Parse configuration.
 func Parse(config interface{}) (err error) {
 	if disableFags {
 		return
@@ -108,7 +106,7 @@ func Parse(config interface{}) (err error) {
 	return
 }
 
-// Reset maps caling setup function
+// Reset maps caling setup function.
 func Reset() {
 	disableFags = false
 	flag.CommandLine = flag.NewFlagSet(os.Args[0], flag.ContinueOnError)
@@ -191,7 +189,6 @@ func reflectFloat(field *reflect.StructField, value *reflect.Value, tag string) 
 }
 
 func reflectString(field *reflect.StructField, value *reflect.Value, tag string) (err error) {
-
 	var aux, defaltValue string
 	defaltValue = field.Tag.Get(structtag.TagDefault)
 	usage := field.Tag.Get(structtag.TagHelper)
@@ -224,12 +221,12 @@ func reflectBool(field *reflect.StructField, value *reflect.Value, tag string) (
 	return
 }
 
-// PrintDefaults print the default help
+// PrintDefaults print the default help.
 func PrintDefaults() {
 	flag.PrintDefaults()
 }
 
-// DefaultUsage is assigned for Usage function by default
+// DefaultUsage is assigned for Usage function by default.
 func DefaultUsage() {
 	fmt.Println("Usage")
 	PrintDefaults()

@@ -23,7 +23,6 @@ type configTest struct {
 }
 
 func main() {
-
 	// step 2: Instantiate your structure.
 	config := configTest{}
 

@@ -27,7 +27,6 @@ type testSubArraySub struct {
 // Test functions
 
 func TestParseArray(t *testing.T) {
-
 	Setup("cfg", "cfgDefault")
 
 	s := &testStructArray{
@@ -65,5 +64,4 @@ func TestParseArray(t *testing.T) {
 	if err == nil { // TODO: support cfgRequired
 		t.Fatal("expected error about required field but got nil")
 	}
-
 }
