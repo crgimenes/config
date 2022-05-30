@@ -1,6 +1,7 @@
 package structtag
 
 import (
+	"fmt"
 	"errors"
 	"fmt"
 	"reflect"
@@ -65,6 +66,8 @@ func Setup() {
 	ParseNameMap = make(map[string]ReflectFunc)
 
 	ParseMap[reflect.Struct] = ReflectStruct
+	ParseMap[reflect.Array] = ReflectArray
+	ParseMap[reflect.Slice] = ReflectArray
 }
 
 // Reset maps caling setup function
@@ -215,5 +218,24 @@ func updateTag(field *reflect.StructField, superTag string) (ret string) {
 // ReflectStruct is called when the Parse encounters a sub-structure in the current structure and then calls Parser again to treat the fields of the sub-structure.
 func ReflectStruct(field *reflect.StructField, value *reflect.Value, tag string) (err error) {
 	err = Parse(value.Addr().Interface(), tag)
+	return
+}
+
+// ReflectArray is called when the Parse encounters a sub-array in the current structure and then calls Parser again to treat the fields of the sub-array.
+func ReflectArray(field *reflect.StructField, value *reflect.Value, tag string) (err error) {
+	req := field.Tag.Get("cfgRequired")
+	if req == "true" && value.Len() == 0 {
+		err = fmt.Errorf("-%v is required", tag)
+		return
+	}
+	switch value.Type().Elem().Kind() {
+	case reflect.Struct, reflect.Slice, reflect.Array, reflect.Ptr, reflect.Interface:
+		for i := 0; i < value.Len(); i++ {
+			err = Parse(value.Index(i).Addr().Interface(), fmt.Sprintf("%s[%d]", tag, i))
+			if err != nil {
+				return
+			}
+		}
+	}
 	return
 }
