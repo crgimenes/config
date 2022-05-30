@@ -107,9 +107,6 @@ func Parse(s interface{}, superTag string) (err error) {
 			continue
 		}
 
-		fmt.Println("name:", field.Type.Name())
-		fmt.Println("type:", field.Type.String())
-
 		f, ok := ParseNameMap[field.Type.Name()]
 		if ok {
 			err = f(&field, &value, t)
