@@ -12,10 +12,10 @@ import (
 	"time"
 
 	"github.com/fsnotify/fsnotify"
-	"github.com/goconfig/goconfig/goenv"
-	"github.com/goconfig/goconfig/goflags"
-	"github.com/goconfig/goconfig/structtag"
-	"github.com/goconfig/goconfig/validate"
+	"github.com/crgimenes/goconfig/goenv"
+	"github.com/crgimenes/goconfig/goflags"
+	"github.com/crgimenes/goconfig/structtag"
+	"github.com/crgimenes/goconfig/validate"
 )
 
 // Fileformat struct holds the functions to Load the file containing the settings.

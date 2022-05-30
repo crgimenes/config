@@ -1,4 +1,4 @@
-module github.com/goconfig/goconfig
+module github.com/crgimenes/goconfig
 
 go 1.17
 
