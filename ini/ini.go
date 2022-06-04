@@ -37,11 +37,8 @@ func LoadINI(config interface{}) (err error) {
 
 // PrepareHelp return help string for this file format.
 func PrepareHelp(config interface{}) (help string, err error) {
-	m := make(map[string]any)
-	err = ini.MapTo(config, m)
-	if err != nil {
-		return
-	}
+
+	m := config.(map[string]interface{})
 
 	for k, v := range m {
 		s := ""
