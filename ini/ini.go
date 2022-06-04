@@ -51,7 +51,7 @@ func PrepareHelp(config interface{}) (help string, err error) {
 	// TODO: implement multiple levels
 	help = ""
 	for k, v := range m {
-		help += fmt.Sprintf("%s = %q\n", k, v)
+		help += fmt.Sprintf("%s = %v\n", k, v)
 	}
 	return
 }
