@@ -1,9 +1,9 @@
 package ini
 
 import (
-	"encoding/json"
 	"os"
 	"path/filepath"
+	"strconv"
 
 	"github.com/crgimenes/goconfig"
 	ini "gopkg.in/ini.v1"
@@ -25,7 +25,9 @@ func LoadINI(config interface{}) (err error) {
 	if os.IsNotExist(err) && !goconfig.FileRequired {
 		err = nil
 		return
-	} else if err != nil {
+	}
+
+	if err != nil {
 		return
 	}
 
@@ -35,11 +37,25 @@ func LoadINI(config interface{}) (err error) {
 
 // PrepareHelp return help string for this file format.
 func PrepareHelp(config interface{}) (help string, err error) {
-	var helpAux []byte
-	helpAux, err = json.MarshalIndent(&config, "", "    ")
+	m := make(map[string]any)
+	err = ini.MapTo(config, m)
 	if err != nil {
 		return
 	}
-	help = string(helpAux)
+
+	for k, v := range m {
+		s := ""
+
+		switch v.(type) {
+		case string:
+			s = v.(string)
+		case int:
+			s = strconv.Itoa(v.(int))
+		case bool:
+			s = strconv.FormatBool(v.(bool))
+		}
+
+		help += k + " = " + s + "\n"
+	}
 	return
 }
