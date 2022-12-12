@@ -10,20 +10,20 @@ import (
 )
 
 func init() {
-	f := goconfig.Fileformat{
+	f := config.Fileformat{
 		Extension:   ".json",
 		Load:        LoadJSON,
 		PrepareHelp: PrepareHelp,
 	}
-	goconfig.Formats = append(goconfig.Formats, f)
+	config.Formats = append(config.Formats, f)
 }
 
 // LoadJSON config file.
 func LoadJSON(config interface{}) (err error) {
-	configFile := filepath.Join(goconfig.Path, goconfig.File)
+	configFile := filepath.Join(config.Path, config.File)
 	file, err := os.Open(configFile)
 	if err != nil {
-		if os.IsNotExist(err) && !goconfig.FileRequired {
+		if os.IsNotExist(err) && !config.FileRequired {
 			err = nil
 		}
 		return

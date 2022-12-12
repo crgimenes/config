@@ -11,19 +11,19 @@ import (
 )
 
 func init() {
-	f := goconfig.Fileformat{
+	f := config.Fileformat{
 		Extension:   ".ini",
 		Load:        LoadINI,
 		PrepareHelp: PrepareHelp,
 	}
-	goconfig.Formats = append(goconfig.Formats, f)
+	config.Formats = append(config.Formats, f)
 }
 
 // LoadINI config file.
 func LoadINI(config interface{}) (err error) {
-	configFile := filepath.Join(goconfig.Path, goconfig.File)
+	configFile := filepath.Join(config.Path, config.File)
 	file, err := os.Open(configFile)
-	if os.IsNotExist(err) && !goconfig.FileRequired {
+	if os.IsNotExist(err) && !config.FileRequired {
 		err = nil
 		return
 	}

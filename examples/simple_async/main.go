@@ -3,7 +3,6 @@ package main
 import (
 	"log"
 
-	"crg.eti.br/go/config"
 	_ "crg.eti.br/go/config/json"
 )
 
@@ -28,13 +27,13 @@ func main() {
 	// step 2: Instantiate your structure.
 	config := configTest{}
 
-	goconfig.FileRequired = true
-	goconfig.WatchConfigFile = true
-	goconfig.Path = "./"
-	goconfig.File = "config.json"
+	config.FileRequired = true
+	config.WatchConfigFile = true
+	config.Path = "./"
+	config.File = "config.json"
 
 	// step 3: Pass the instance pointer to the parser
-	updatesCh, errCh, err := goconfig.ParseAndWatch(&config)
+	updatesCh, errCh, err := config.ParseAndWatch(&config)
 	if err != nil {
 		println(err.Error())
 		return

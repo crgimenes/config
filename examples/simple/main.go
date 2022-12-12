@@ -2,8 +2,6 @@ package main
 
 import (
 	"fmt"
-
-	"crg.eti.br/go/config"
 )
 
 /*
@@ -27,7 +25,7 @@ func main() {
 	config := configTest{}
 
 	// step 3: Pass the instance pointer to the parser
-	err := goconfig.Parse(&config)
+	err := config.Parse(&config)
 	if err != nil {
 		fmt.Println(err)
 		return

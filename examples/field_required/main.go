@@ -3,8 +3,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-
-	"crg.eti.br/go/config"
 )
 
 // Declare config struct
@@ -31,7 +29,7 @@ func main() {
 	config := configTest{}
 
 	// Pass the struct instance pointer to the parser
-	err := goconfig.Parse(&config)
+	err := config.Parse(&config)
 	if err != nil {
 		fmt.Println(err)
 		return
