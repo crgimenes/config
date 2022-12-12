@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/crgimenes/goconfig"
+	"crg.eti.br/go/config"
 )
 
 /*

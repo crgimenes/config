@@ -5,8 +5,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/crgimenes/goconfig"
-	"github.com/crgimenes/goconfig/helper"
+	"crg.eti.br/go/config"
+	"crg.eti.br/go/config/helper"
 )
 
 func init() {

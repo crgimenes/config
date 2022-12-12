@@ -1,9 +1,9 @@
-module github.com/crgimenes/goconfig
+module crg.eti.br/go/config
 
-go 1.18
+go 1.19
 
 require (
-	github.com/crgimenes/goconfig v1.2.1
+	crg.eti.br/go/config v1.2.1
 	github.com/fsnotify/fsnotify v1.5.4
 	github.com/nuveo/log v0.0.0-20190430190217-44d02db6bdf8
 	gopkg.in/ini.v1 v1.66.5

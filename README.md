@@ -6,7 +6,7 @@ goconfig uses a struct as input and populates the fields of this struct with par
 ## Install
 
 ```
-go get github.com/crgimenes/goconfig
+go get crg.eti.br/go/config
 ```
 
 ## Example
@@ -14,7 +14,7 @@ go get github.com/crgimenes/goconfig
 ```go
 package main
 
-import "github.com/crgimenes/goconfig"
+import "crg.eti.br/go/config"
 
 /*
 step 1: Declare your configuration struct,

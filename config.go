@@ -1,6 +1,6 @@
 // Package goconfig uses a struct as input and populates the
-//fields of this struct with parameters fom command
-//line, environment variables and configuration file.
+// fields of this struct with parameters fom command
+// line, environment variables and configuration file.
 package goconfig
 
 import (
@@ -11,11 +11,11 @@ import (
 	"path/filepath"
 	"time"
 
+	"crg.eti.br/go/config/goenv"
+	"crg.eti.br/go/config/goflags"
+	"crg.eti.br/go/config/structtag"
+	"crg.eti.br/go/config/validate"
 	"github.com/fsnotify/fsnotify"
-	"github.com/crgimenes/goconfig/goenv"
-	"github.com/crgimenes/goconfig/goflags"
-	"github.com/crgimenes/goconfig/structtag"
-	"github.com/crgimenes/goconfig/validate"
 )
 
 // Fileformat struct holds the functions to Load the file containing the settings.

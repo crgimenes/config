@@ -3,8 +3,8 @@ package main
 import (
 	"log"
 
-	"github.com/crgimenes/goconfig"
-	_ "github.com/crgimenes/goconfig/json"
+	"crg.eti.br/go/config"
+	_ "crg.eti.br/go/config/json"
 )
 
 /*

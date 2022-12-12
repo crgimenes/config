@@ -6,7 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/crgimenes/goconfig"
+	"crg.eti.br/go/config"
 	ini "gopkg.in/ini.v1"
 )
 

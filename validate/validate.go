@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/crgimenes/goconfig/structtag"
+	"crg.eti.br/go/config/structtag"
 )
 
 // Prefix is a string that would be placed at the beginning of the generated tags.
