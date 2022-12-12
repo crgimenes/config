@@ -5,25 +5,25 @@ import (
 	"os"
 	"path/filepath"
 
-	"crg.eti.br/go/config"
+	goconfig "crg.eti.br/go/config"
 	"crg.eti.br/go/config/helper"
 )
 
 func init() {
-	f := config.Fileformat{
+	f := goconfig.Fileformat{
 		Extension:   ".json",
 		Load:        LoadJSON,
 		PrepareHelp: PrepareHelp,
 	}
-	config.Formats = append(config.Formats, f)
+	goconfig.Formats = append(goconfig.Formats, f)
 }
 
 // LoadJSON config file.
 func LoadJSON(config interface{}) (err error) {
-	configFile := filepath.Join(config.Path, config.File)
+	configFile := filepath.Join(goconfig.Path, goconfig.File)
 	file, err := os.Open(configFile)
 	if err != nil {
-		if os.IsNotExist(err) && !config.FileRequired {
+		if os.IsNotExist(err) && !goconfig.FileRequired {
 			err = nil
 		}
 		return

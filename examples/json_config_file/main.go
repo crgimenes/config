@@ -6,6 +6,7 @@ package main
 import (
 	"encoding/json"
 
+	goconfig "crg.eti.br/go/config"
 	_ "crg.eti.br/go/config/json"
 )
 
@@ -29,8 +30,8 @@ type configTest struct {
 func main() {
 	config := configTest{}
 
-	config.File = "config.json"
-	err := config.Parse(&config)
+	goconfig.File = "config.json"
+	err := goconfig.Parse(&config)
 	if err != nil {
 		println(err)
 		return

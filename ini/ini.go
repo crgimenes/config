@@ -6,24 +6,24 @@ import (
 	"os"
 	"path/filepath"
 
-	"crg.eti.br/go/config"
+	goconfig "crg.eti.br/go/config"
 	ini "gopkg.in/ini.v1"
 )
 
 func init() {
-	f := config.Fileformat{
+	f := goconfig.Fileformat{
 		Extension:   ".ini",
 		Load:        LoadINI,
 		PrepareHelp: PrepareHelp,
 	}
-	config.Formats = append(config.Formats, f)
+	goconfig.Formats = append(goconfig.Formats, f)
 }
 
 // LoadINI config file.
 func LoadINI(config interface{}) (err error) {
-	configFile := filepath.Join(config.Path, config.File)
+	configFile := filepath.Join(goconfig.Path, goconfig.File)
 	file, err := os.Open(configFile)
-	if os.IsNotExist(err) && !config.FileRequired {
+	if os.IsNotExist(err) && !goconfig.FileRequired {
 		err = nil
 		return
 	}
