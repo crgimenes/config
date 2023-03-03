@@ -9,13 +9,11 @@ import (
 	"os"
 	"path"
 	"path/filepath"
-	"time"
 
 	"crg.eti.br/go/config/goenv"
 	"crg.eti.br/go/config/goflags"
 	"crg.eti.br/go/config/structtag"
 	"crg.eti.br/go/config/validate"
-	"github.com/fsnotify/fsnotify"
 )
 
 // Fileformat struct holds the functions to Load the file containing the settings.
@@ -184,76 +182,5 @@ func loadConfigFromFile(ext string, config interface{}) (err error) {
 		return
 	}
 	HelpString, err = format.PrepareHelp(config)
-	if err != nil {
-		return
-	}
-
-	return
-}
-
-func asyncParse(config interface{}, w *fsnotify.Watcher, chErr chan<- error, chUp chan<- int64) {
-	var state uint
-	for {
-		select {
-		case ev := <-w.Events:
-			// these event check are needed for vi-like editors that uses a swap file when saving
-			// other editors like nano directly writes to the file
-			if ev.Op&fsnotify.Rename == fsnotify.Rename && (state == 0) {
-				state |= (1 << 0)
-			} else if ev.Op&fsnotify.Chmod == fsnotify.Chmod && (state == 1) {
-				state |= (1 << 1)
-			} else if ev.Op&fsnotify.Remove == fsnotify.Remove && (state == 3) {
-				state |= (1 << 2)
-			}
-
-			if (ev.Op&fsnotify.Write == fsnotify.Write) || (state == 7) {
-				if err := loadConfigFromFile(path.Ext(File), config); err != nil {
-					chErr <- err
-					break
-				}
-
-				chUp <- time.Now().Unix()
-
-				state = 0
-				w.Add(path.Join(Path, File))
-			}
-
-		case err := <-w.Errors:
-			chErr <- err
-			break
-		}
-	}
-}
-
-// ParseAndWatch configuration returns a channel for errors while watching files
-// and anorther when each update has been detected.
-func ParseAndWatch(config interface{}) (chChanges chan int64, chErr chan error, err error) {
-	chErr = make(chan error, 1)
-	chChanges = make(chan int64, 1)
-
-	lookupEnv()
-
-	ext := path.Ext(File)
-	if ext != "" {
-		if err = loadConfigFromFile(ext, config); err != nil {
-			return
-		}
-
-		if WatchConfigFile {
-			watcher, err := fsnotify.NewWatcher()
-			if err != nil {
-				return chChanges, chErr, err
-			}
-			if err = watcher.Add(path.Join(Path, File)); err != nil {
-				return chChanges, chErr, err
-			}
-			go asyncParse(config, watcher, chErr, chChanges)
-		}
-	}
-
-	validate.Prefix = PrefixFlag
-	validate.Setup(Tag, TagDefault)
-	err = validate.Parse(config)
-
 	return
 }
