@@ -1,6 +1,6 @@
 module crg.eti.br/go/config
 
-go 1.21
+go 1.22
 
 require gopkg.in/ini.v1 v1.67.0
 
